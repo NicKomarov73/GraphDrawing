@@ -86,17 +86,19 @@ def generate_fun():
         y = random.randint(-400, 400)
         draw(x, y)
 
+    if v_count * (v_count-1) / 2 < e_count:
+        e_count = v_count * (v_count-1) / 2
+
     while e_count > 0:
         fir = random.randint(0, v_count-1)
         sec = random.randint(0, v_count-1)
         line(fir, sec, 'black', brus)
 
-        if not fir in graph[sec]:
+        if not fir in graph[sec] and fir != sec:
             graph[sec].append(fir)
-        if not sec in graph[fir]:
             graph[fir].append(sec)
+            e_count -= 1
 
-        e_count -= 1
 
 def draw(x, y):
     global brus
